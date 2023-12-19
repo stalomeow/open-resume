@@ -20,31 +20,20 @@ export const ResumePDFProfile = ({
   themeColor: string;
   isPDF: boolean;
 }) => {
-  const { name, email, phone, url, summary, location } = profile;
-  const iconProps = { email, phone, location, url };
+  const { name, email, phone, wechat, github, url, summary, location } = profile;
+  const iconProps1 = { phone, wechat, email, location };
+  const iconProps2 = { github, url };
 
-  return (
-    <ResumePDFSection style={{ marginTop: spacing["4"] }}>
-      <ResumePDFText
-        bold={true}
-        themeColor={themeColor}
-        style={{ fontSize: "20pt" }}
-      >
-        {name}
-      </ResumePDFText>
-      {summary && <ResumePDFText>{summary}</ResumePDFText>}
-      <View
-        style={{
-          ...styles.flexRowBetween,
-          flexWrap: "wrap",
-          marginTop: spacing["0.5"],
-        }}
-      >
+  const IconGroup = ({ iconProps }: { iconProps: Record<string, string>}) => {
+    return (
+      <>
         {Object.entries(iconProps).map(([key, value]) => {
           if (!value) return null;
 
           let iconType = key as IconType;
-          if (key === "url") {
+          if (key === "github") {
+            iconType = "url_github";
+          } else if (key === "url") {
             if (value.includes("github")) {
               iconType = "url_github";
             } else if (value.includes("linkedin")) {
@@ -52,7 +41,7 @@ export const ResumePDFProfile = ({
             }
           }
 
-          const shouldUseLinkWrapper = ["email", "url", "phone"].includes(key);
+          const shouldUseLinkWrapper = ["email", "phone", "github", "url"].includes(key);
           const Wrapper = ({ children }: { children: React.ReactNode }) => {
             if (!shouldUseLinkWrapper) return <>{children}</>;
 
@@ -94,7 +83,40 @@ export const ResumePDFProfile = ({
             </View>
           );
         })}
+      </>
+    );
+  };
+
+  return (
+    <ResumePDFSection style={{ marginTop: spacing["4"] }}>
+      <ResumePDFText
+        bold={true}
+        themeColor={themeColor}
+        style={{ fontSize: "20pt" }}
+      >
+        {name}
+      </ResumePDFText>
+      {summary && <ResumePDFText>{summary}</ResumePDFText>}
+      <View
+        style={{
+          ...styles.flexRowBetween,
+          flexWrap: "wrap",
+          marginTop: spacing["0.5"],
+        }}
+      >
+        <IconGroup iconProps={iconProps1} />
       </View>
+      {(github || url) &&
+        <View
+          style={{
+            ...styles.flexRowBetween,
+            flexWrap: "wrap",
+            marginTop: spacing["0.5"],
+          }}
+        >
+          <IconGroup iconProps={iconProps2} />
+        </View>
+      }
     </ResumePDFSection>
   );
 };

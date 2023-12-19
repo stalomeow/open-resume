@@ -7,7 +7,7 @@ import { ResumeProfile } from "lib/redux/types";
 export const ProfileForm = () => {
   const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
-  const { name, email, phone, url, summary, location } = profile;
+  const { name, email, phone, wechat, github, url, summary, location } = profile;
 
   const handleProfileChange = (field: keyof ResumeProfile, value: string) => {
     dispatch(changeProfile({ field, value }));
@@ -33,11 +33,11 @@ export const ProfileForm = () => {
           onChange={handleProfileChange}
         />
         <Input
-          label="Email"
+          label="WeChat"
           labelClassName="col-span-4"
-          name="email"
-          placeholder="hello@khanacademy.org"
-          value={email}
+          name="wechat"
+          placeholder="WeChat ID"
+          value={wechat}
           onChange={handleProfileChange}
         />
         <Input
@@ -49,11 +49,11 @@ export const ProfileForm = () => {
           onChange={handleProfileChange}
         />
         <Input
-          label="Website"
+          label="Email"
           labelClassName="col-span-4"
-          name="url"
-          placeholder="linkedin.com/in/khanacademy"
-          value={url}
+          name="email"
+          placeholder="hello@khanacademy.org"
+          value={email}
           onChange={handleProfileChange}
         />
         <Input
@@ -62,6 +62,22 @@ export const ProfileForm = () => {
           name="location"
           placeholder="NYC, NY"
           value={location}
+          onChange={handleProfileChange}
+        />
+        <Input
+          label="GitHub"
+          labelClassName="col-span-full"
+          name="github"
+          placeholder="github.com/github"
+          value={github}
+          onChange={handleProfileChange}
+        />
+        <Input
+          label="Website"
+          labelClassName="col-span-full"
+          name="url"
+          placeholder="linkedin.com/in/khanacademy"
+          value={url}
           onChange={handleProfileChange}
         />
       </div>

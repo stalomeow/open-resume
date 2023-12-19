@@ -2,6 +2,8 @@ export interface ResumeProfile {
   name: string;
   email: string;
   phone: string;
+  wechat: string;
+  github: string;
   url: string;
   summary: string;
   location: string;
