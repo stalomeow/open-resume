@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -22,6 +23,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "next": "13.4.4",
+    "patch-package": "^8.0.0",
     "pdfjs": "^2.5.0",
     "pdfjs-dist": "^3.7.107",
     "postcss": "8.4.24",
